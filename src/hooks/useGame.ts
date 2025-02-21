@@ -1,4 +1,3 @@
-import { s } from "framer-motion/client";
 import useData from "./useData";
 import { Genre } from "./useGenres";
 
