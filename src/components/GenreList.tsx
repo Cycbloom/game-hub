@@ -1,5 +1,6 @@
-import { Text, UnorderedList, ListItem } from "@chakra-ui/react";
+import { Text, List, ListItem, HStack, Image } from "@chakra-ui/react";
 import useGenres from "../hooks/useGenres";
+import getCroppedImageUrl from "../services/image-url";
 
 const GenreList = () => {
   const { data: genres, error, loading } = useGenres();
@@ -8,11 +9,21 @@ const GenreList = () => {
     <>
       {error && <Text>{error}</Text>}
       {loading && <Text>Loading...</Text>}
-      <UnorderedList>
+      <List>
         {genres.map((genre) => (
-          <ListItem key={genre.id}>{genre.name}</ListItem>
+          <ListItem key={genre.id} paddingY="5px">
+            <HStack>
+              <Image
+                src={getCroppedImageUrl(genre.image_background)}
+                alt={genre.name}
+                boxSize="32px"
+                borderRadius={8}
+              />
+              <Text fontSize="lg">{genre.name}</Text>
+            </HStack>
+          </ListItem>
         ))}
-      </UnorderedList>
+      </List>
     </>
   );
 };
